@@ -1,0 +1,3 @@
+# niks
+
+My nixos config
