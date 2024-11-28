@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [ <home-manager/nixos> ];
@@ -35,7 +35,7 @@
       enable = true;
       userEmail = "martijn.hemeryck@gmail.com";
       userName = "mhemeryck";
-      extraConfig = { init.defaultBranch = "master"; };
+      extraConfig.init.defaultBranch = "master";
     };
 
     programs.go = {
