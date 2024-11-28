@@ -5,19 +5,19 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      <home-manager/nixos>
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./home-manager.nix
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-486539b9-1932-4cd5-86c1-7939a06a647e".device = "/dev/disk/by-uuid/486539b9-1932-4cd5-86c1-7939a06a647e";
+  boot.initrd.luks.devices."luks-486539b9-1932-4cd5-86c1-7939a06a647e".device =
+    "/dev/disk/by-uuid/486539b9-1932-4cd5-86c1-7939a06a647e";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -54,13 +54,13 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   security.sudo.extraRules = [{
-      users = [ "mhemeryck" ];
-      commands = [{
-        command = "ALL";
-        options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
-      }];
-    }
-  ];
+    users = [ "mhemeryck" ];
+    commands = [{
+      command = "ALL";
+      options =
+        [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+    }];
+  }];
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -82,87 +82,11 @@
     isNormalUser = true;
     description = "Martijn Hemeryck";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    packages = with pkgs;
+      [
+        #  thunderbird
+      ];
     shell = pkgs.nushell;
-  };
-
-  home-manager.users.mhemeryck = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      bat
-      carapace
-      cargo
-      dprint
-      gh
-      glab
-      go
-      git
-      gnupg
-      helix
-      kubectl
-      nixfmt-classic
-      nushell
-      # oh-my-posh
-      pass
-      poetry
-      python313
-      rustc
-      tldr
-      wl-clipboard
-    ];
-    # programs.bash.enable = true;
-
-    programs.carapace = {
-      enable = true;
-    };
-
-    programs.git = {
-      enable = true;
-      userEmail = "martijn.hemeryck@gmail.com";
-      userName = "mhemeryck";
-      extraConfig = {
-        init.defaultBranch = "master";
-      };
-    };
-
-    programs.go = {
-      enable = true;
-      goPath = ".go";
-    };
-
-    programs.helix = {
-      enable = true;
-      defaultEditor = true;
-      settings = {
-        theme = "molokai";
-
-        keys.normal = {
-          C-l = "jump_view_right";
-          C-h = "jump_view_left";
-          C-j = "jump_view_down";
-          C-k = "jump_view_up";
-        };
-      };
-      languages.language = [{
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
-      }];
-    };
-
-    # programs.oh-my-posh = {
-    #   enable = true;
-    #   enableNushellIntegration = true;
-    # };
-
-    # services.gpg-agent = {
-    #   enable = true;
-    # };
-
-    # The state version is required and should stay at the version you
-    # originally installed.
-    home.stateVersion = "24.05";
   };
 
   # Install firefox.
@@ -181,8 +105,8 @@
     pinentry-gnome3
     vim
     wezterm
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
