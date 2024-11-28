@@ -16,6 +16,7 @@
       gnupg
       helix
       kubectl
+      nil
       nixfmt-classic
       nushell
       # oh-my-posh
