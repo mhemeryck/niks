@@ -101,6 +101,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     browserpass
+    git
     google-chrome
     pinentry-gnome3
     vim
