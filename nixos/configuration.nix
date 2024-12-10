@@ -102,6 +102,7 @@
     browserpass
     git
     google-chrome
+    home-manager
     pinentry-gnome3
     vim
     wezterm
