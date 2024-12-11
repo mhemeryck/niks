@@ -32,7 +32,7 @@
     nil
     nixfmt-classic
     nushell
-    # oh-my-posh
+    oh-my-posh
     pass
     poetry
     python313
