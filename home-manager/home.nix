@@ -38,6 +38,7 @@
     python313
     rustc
     tldr
+    trash-cli
     wl-clipboard
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -125,6 +126,8 @@
       formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
     }];
   };
+
+  programs.oh-my-posh.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
