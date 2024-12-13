@@ -8,15 +8,15 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
-  ];
+  # imports = [
+  #   # include NixOS-WSL modules
+  #   <nixos-wsl/modules>
+  # ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  wsl.enable = true;
-  wsl.defaultUser = "mhemeryck";
+  # wsl.enable = true;
+  # wsl.defaultUser = "mhemeryck";
 
   security.pki.certificateFiles = [
     ./certs/cert_ISA_GP_Intermediate.pem
@@ -41,7 +41,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  # system.stateVersion = "24.05"; # Did you read the comment?
 
   environment.systemPackages = with pkgs; [
     bat
