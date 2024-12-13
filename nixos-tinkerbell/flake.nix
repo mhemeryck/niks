@@ -10,6 +10,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
+        ./certs.nix
         nixos-wsl.nixosModules.default
         {
           system.stateVersion = "24.05";

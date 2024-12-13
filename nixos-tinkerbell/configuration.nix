@@ -5,24 +5,10 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  # imports = [
-  #   # include NixOS-WSL modules
-  #   <nixos-wsl/modules>
-  # ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # wsl.enable = true;
-  # wsl.defaultUser = "mhemeryck";
-
-  security.pki.certificateFiles = [
-    ./certs/cert_ISA_GP_Intermediate.pem
-    ./certs/cert_ISA_GP_Root.pem
-    ./certs/cert_ISA_SSL-FWD-Trust.pem
-  ];
 
   users.users.mhemeryck = {
     isNormalUser = true;
