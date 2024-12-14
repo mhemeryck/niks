@@ -130,9 +130,9 @@
       EDITOR = "hx";
       COLORTERM = "truecolor";
     };
-    # extraConfig = ''
-    #   source ~/.oh-my-posh.nu
-    # '';
+    extraConfig = ''
+      $env.config.show_banner = false
+    '';
   };
 
   programs.oh-my-posh.enable = true;
