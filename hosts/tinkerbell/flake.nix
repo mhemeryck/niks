@@ -5,7 +5,7 @@
   };
 
   outputs = { self, nixpkgs, nixos-wsl, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tinkerbell = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
