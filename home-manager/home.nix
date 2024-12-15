@@ -89,9 +89,6 @@
   #
   #  /etc/profiles/per-user/mhemeryck/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
 
   programs.carapace = { enable = true; };
 
@@ -125,6 +122,18 @@
       auto-format = true;
       formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
     }];
+  };
+
+  programs.nushell = {
+    enable = true;
+    environmentVariables = {
+      EDITOR = "hx";
+      COLORTERM = "truecolor";
+    };
+    extraConfig = ''
+      $env.config.show_banner = false
+      $env.config.edit_mode = "vi"
+    '';
   };
 
   programs.oh-my-posh.enable = true;
