@@ -6,7 +6,7 @@ My nixos config
 
 Set up a fresh nixos install:
 
-    ln -s nixos /etc/nixos
+    ln -s hosts/<host> /etc/nixos
     sudo nixos-rebuild switch
 
 Set up home manager:
