@@ -37,6 +37,7 @@
     poetry
     python313
     rustc
+    terraform
     tldr
     trash-cli
     wl-clipboard
@@ -89,6 +90,8 @@
   #
   #  /etc/profiles/per-user/mhemeryck/etc/profile.d/hm-session-vars.sh
   #
+
+  nixpkgs.config.allowUnfree = true;
 
   programs.carapace = { enable = true; };
 
