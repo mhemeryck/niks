@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-{
+rec {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mhemeryck";
@@ -22,10 +22,11 @@
     carapace
     cargo
     dprint
+    google-cloud-sdk
     gh
+    git
     glab
     go
-    git
     gnupg
     helix
     kubectl
@@ -104,7 +105,7 @@
 
   programs.go = {
     enable = true;
-    goPath = ".go";
+    # goPath = ".go";
   };
 
   programs.helix = {
@@ -132,6 +133,7 @@
     environmentVariables = {
       EDITOR = "hx";
       COLORTERM = "truecolor";
+      GOPATH = "${home.homeDirectory}/.go";
     };
     extraConfig = ''
       $env.config.show_banner = false
