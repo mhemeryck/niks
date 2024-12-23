@@ -101,7 +101,10 @@ rec {
     enable = true;
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
-    extraConfig.init.defaultBranch = "master";
+    extraConfig = {
+      init.defaultBranch = "master";
+      "url.git@gitlab.com".insteadOf = "https://gitlab.com/";
+    };
   };
 
   programs.go = {
@@ -135,6 +138,7 @@ rec {
       EDITOR = "hx";
       COLORTERM = "truecolor";
       GOPATH = "${home.homeDirectory}/.go";
+      GOPRIVATE = "gitlab.com/codabox";
     };
     extraConfig = ''
       $env.config.show_banner = false
