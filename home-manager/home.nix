@@ -27,6 +27,7 @@ rec {
     git
     glab
     go
+    gopls
     gnupg
     helix
     kubectl
