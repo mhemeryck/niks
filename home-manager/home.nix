@@ -141,11 +141,18 @@ rec {
         C-k = "jump_view_up";
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
-    }];
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+      }
+      {
+        name = "markdown";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt-classic}/bin/dprint";
+      }
+    ];
   };
 
   programs.nushell = {
