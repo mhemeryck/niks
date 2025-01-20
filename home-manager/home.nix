@@ -150,7 +150,10 @@ rec {
       {
         name = "markdown";
         auto-format = true;
-        formatter.command = "${pkgs.nixfmt-classic}/bin/dprint";
+        formatter = {
+          command = "${pkgs.dprint}/bin/dprint";
+          args = [ "fmt" "--stdin" ];
+        };
       }
     ];
   };
