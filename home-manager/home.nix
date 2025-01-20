@@ -75,6 +75,20 @@ rec {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".dprint.json".text = builtins.toJSON {
+      json = { };
+      markdown = { };
+      toml = { };
+      dockerfile = { };
+      excludes = [ "**/*-lock.json" ];
+      plugins = [
+        "https://plugins.dprint.dev/json-0.19.4.wasm"
+        "https://plugins.dprint.dev/markdown-0.17.8.wasm"
+        "https://plugins.dprint.dev/toml-0.6.4.wasm"
+        "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
+      ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
