@@ -31,6 +31,7 @@ rec {
     gnupg
     helix
     kubectl
+    markdown-oxide
     nil
     nixfmt-classic
     nushell
