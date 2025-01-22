@@ -39,6 +39,8 @@ rec {
     pass
     poetry
     python313
+    pyright
+    ruff
     rustc
     terraform
     tldr
@@ -144,21 +146,36 @@ rec {
         C-k = "jump_view_up";
       };
     };
-    languages.language = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
-      }
-      {
-        name = "markdown";
-        auto-format = true;
-        formatter = {
-          command = "${pkgs.dprint}/bin/dprint";
-          args = [ "fmt" "--stdin" "markdown" ];
-        };
-      }
-    ];
+    languages = {
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [ "fmt" "--stdin" "markdown" ];
+          };
+        }
+        {
+          name = "python";
+          auto-format = true;
+          language-servers = [ "pyright" "ruff" ];
+        }
+      ];
+      language-server.pyright.config.python.analysis = {
+        typeCheckingMode = "basic";
+      };
+      language-server.ruff = {
+        command = "${pkgs.ruff}/bin/ruff";
+        args = [ "server" ];
+        config.settings = { args = [ "ignore" "E501" ]; };
+      };
+    };
   };
 
   programs.nushell = {
