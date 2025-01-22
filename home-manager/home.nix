@@ -165,13 +165,17 @@ rec {
           name = "python";
           auto-format = true;
           language-servers = [ "pyright" "ruff" ];
+          formatter = {
+            command = "ruff";
+            args = [ "format" "-" ];
+          };
         }
       ];
       language-server.pyright.config.python.analysis = {
         typeCheckingMode = "basic";
       };
       language-server.ruff = {
-        command = "${pkgs.ruff}/bin/ruff";
+        command = "ruff";
         args = [ "server" ];
         config.settings = { args = [ "ignore" "E501" ]; };
       };
