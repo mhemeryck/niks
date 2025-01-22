@@ -44,7 +44,9 @@ rec {
     tldr
     trash-cli
     wl-clipboard
+    zig
     zip
+    zls
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
