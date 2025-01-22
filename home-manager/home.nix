@@ -171,13 +171,13 @@ rec {
           };
         }
       ];
-      language-server.pyright.config.python.analysis = {
-        typeCheckingMode = "basic";
-      };
-      language-server.ruff = {
-        command = "ruff";
-        args = [ "server" ];
-        config.settings = { args = [ "ignore" "E501" ]; };
+      language-server = {
+        pyright.config.python.analysis.typeCheckingMode = "basic";
+        ruff = {
+          command = "ruff";
+          args = [ "server" ];
+          config.settings.args = [ "ignore" "E501" ];
+        };
       };
     };
   };
