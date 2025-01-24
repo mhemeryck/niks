@@ -18,6 +18,7 @@ rec {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    awscli2
     bat
     carapace
     cargo
@@ -31,6 +32,7 @@ rec {
     gnupg
     helix
     kubectl
+    nodejs_23
     markdown-oxide
     nil
     nixfmt-classic
