@@ -32,7 +32,7 @@ rec {
     gnupg
     helix
     kubectl
-    nodejs_23
+    nodejs
     markdown-oxide
     nil
     nixfmt-classic
