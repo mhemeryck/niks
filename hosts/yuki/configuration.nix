@@ -101,13 +101,14 @@
   environment.systemPackages = with pkgs; [
     browserpass
     docker
+    ghostty
     git
     google-chrome
     home-manager
     pinentry-gnome3
     vim
     wget
-    inputs.ghostty-flake.packages.${pkgs.system}.default
+    # inputs.ghostty-flake.packages.${pkgs.system}.default
     inputs.wezterm-flake.packages.${pkgs.system}.default
   ];
 
