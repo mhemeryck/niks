@@ -125,7 +125,7 @@ rec {
     userName = "mhemeryck";
     extraConfig = {
       init.defaultBranch = "master";
-      "url.git@gitlab.com".insteadOf = "https://gitlab.com/";
+      "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
       pull.rebase = "true";
     };
   };
