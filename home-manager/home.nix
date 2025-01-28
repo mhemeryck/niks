@@ -22,6 +22,7 @@ rec {
     bat
     carapace
     cargo
+    direnv
     dprint
     google-cloud-sdk
     gh
@@ -198,6 +199,15 @@ rec {
     extraConfig = ''
       $env.config.show_banner = false
       $env.config.edit_mode = "vi"
+      $env.config.hooks.pre_prompt = (
+        $env.config.hooks.pre_prompt | append ({ ||
+            if (which direnv | is-empty) {
+                return
+            }
+
+            direnv export json | from json | default {} | load-env
+        })
+      )
     '';
   };
 
