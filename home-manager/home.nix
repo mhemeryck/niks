@@ -125,6 +125,7 @@ rec {
     enable = true;
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
+    signing.key = "4C4FB5172D377467BC181A78C39863A74BE56E17";
     extraConfig = {
       init.defaultBranch = "master";
       "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
