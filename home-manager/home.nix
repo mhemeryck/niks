@@ -33,9 +33,11 @@ rec {
     gopls
     gnupg
     helix
+    jdt-language-server
     kubectl
     nodejs
     markdown-oxide
+    maven
     nil
     nixfmt-classic
     nushell
