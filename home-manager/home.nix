@@ -26,6 +26,7 @@ rec {
     google-cloud-sdk
     gh
     git
+    git-crypt
     glab
     go
     gopls
