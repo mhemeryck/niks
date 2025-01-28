@@ -46,6 +46,7 @@ rec {
     ruff
     rustc
     terraform
+    terraform-ls
     tldr
     trash-cli
     wl-clipboard
