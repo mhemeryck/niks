@@ -44,7 +44,7 @@ rec {
     nushell
     oh-my-posh
     pass
-    pinentry-tty
+    pinentry-gnome3
     poetry
     python313
     pyright
@@ -226,7 +226,7 @@ rec {
     enable = true;
     enableSshSupport = true;
     sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
-    pinentryPackage = pkgs.pinentry-tty;
+    pinentryPackage = pkgs.pinentry-gnome3;
     grabKeyboardAndMouse = false;
   };
 }
