@@ -44,6 +44,7 @@ rec {
     nushell
     oh-my-posh
     pass
+    pinentry-gnome3
     poetry
     python313
     pyright
@@ -215,6 +216,8 @@ rec {
   };
 
   programs.oh-my-posh.enable = true;
+
+  programs.gpg.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
