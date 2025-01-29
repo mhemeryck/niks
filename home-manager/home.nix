@@ -218,4 +218,12 @@ rec {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
+    pinentryPackage = pkgs.pinentry-gnome3;
+    grabKeyboardAndMouse = false;
+  };
 }
