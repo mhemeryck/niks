@@ -13,7 +13,7 @@
   users.users.mhemeryck = {
     isNormalUser = true;
     description = "Martijn Hemeryck";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs;
       [
         #  thunderbird
@@ -33,6 +33,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    docker
     git
     home-manager
     helix
@@ -53,4 +54,6 @@
       KillMode = "mixed";
     };
   };
+
+  virtualisation.docker.enable = true;
 }

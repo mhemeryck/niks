@@ -2,6 +2,7 @@
   inputs = {
     # NixOS official package source, here using the nixos-24.11 branch
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # ghostty-flake.url = "github:ghostty-org/ghostty";
     wezterm-flake.url = "github:wez/wezterm/main?dir=nix";
     wezterm-flake.inputs.nixpkgs.follows = "nixpkgs";
   };

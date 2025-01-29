@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-{
+rec {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mhemeryck";
@@ -18,17 +18,26 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    awscli2
     bat
     carapace
     cargo
+    direnv
     dprint
+    google-cloud-sdk
     gh
+    git
+    git-crypt
     glab
     go
-    git
+    gopls
     gnupg
     helix
+    jdt-language-server
     kubectl
+    nodejs
+    markdown-oxide
+    maven
     nil
     nixfmt-classic
     nushell
@@ -36,11 +45,17 @@
     pass
     poetry
     python313
+    pyright
+    ruff
     rustc
     terraform
+    terraform-ls
     tldr
     trash-cli
     wl-clipboard
+    zig
+    zip
+    zls
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -72,6 +87,20 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".dprint.json".text = builtins.toJSON {
+      json = { };
+      markdown = { };
+      toml = { };
+      dockerfile = { };
+      excludes = [ "**/*-lock.json" ];
+      plugins = [
+        "https://plugins.dprint.dev/json-0.19.4.wasm"
+        "https://plugins.dprint.dev/markdown-0.17.8.wasm"
+        "https://plugins.dprint.dev/toml-0.6.4.wasm"
+        "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
+      ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -99,12 +128,17 @@
     enable = true;
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
-    extraConfig.init.defaultBranch = "master";
+    signing.key = "4C4FB5172D377467BC181A78C39863A74BE56E17";
+    extraConfig = {
+      init.defaultBranch = "master";
+      "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
+      pull.rebase = "true";
+    };
   };
 
   programs.go = {
     enable = true;
-    goPath = ".go";
+    # goPath = ".go";
   };
 
   programs.helix = {
@@ -120,11 +154,40 @@
         C-k = "jump_view_up";
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
-    }];
+    languages = {
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [ "fmt" "--stdin" "markdown" ];
+          };
+        }
+        {
+          name = "python";
+          auto-format = true;
+          language-servers = [ "pyright" "ruff" ];
+          formatter = {
+            command = "ruff";
+            args = [ "format" "-" ];
+          };
+        }
+      ];
+      language-server = {
+        pyright.config.python.analysis.typeCheckingMode = "basic";
+        ruff = {
+          command = "ruff";
+          args = [ "server" ];
+          config.settings.args = [ "ignore" "E501" ];
+        };
+      };
+    };
   };
 
   programs.nushell = {
@@ -132,10 +195,21 @@
     environmentVariables = {
       EDITOR = "hx";
       COLORTERM = "truecolor";
+      GOPATH = "${home.homeDirectory}/.go";
+      GOPRIVATE = "gitlab.com/codabox";
     };
     extraConfig = ''
       $env.config.show_banner = false
       $env.config.edit_mode = "vi"
+      $env.config.hooks.pre_prompt = (
+        $env.config.hooks.pre_prompt | append ({ ||
+            if (which direnv | is-empty) {
+                return
+            }
+
+            direnv export json | from json | default {} | load-env
+        })
+      )
     '';
   };
 
