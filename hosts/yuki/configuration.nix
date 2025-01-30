@@ -5,6 +5,16 @@
 { pkgs, inputs, ... }:
 
 {
+  # Disable ssh agent for gnome-keyring
+  nixpkgs.overlays = [
+    (final: prev: {
+      gnome-keyring = prev.gnome-keyring.overrideAttrs (oldAttrs: {
+        configureFlags = (builtins.filter (flag: flag != "--enable-ssh-agent")
+          oldAttrs.configureFlags) ++ [ "--disable-ssh-agent" ];
+      });
+    })
+  ];
+
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
