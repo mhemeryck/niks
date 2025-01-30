@@ -133,7 +133,7 @@ rec {
     signing.key = "F9DB1494AE92FE2B";
     extraConfig = {
       init.defaultBranch = "master";
-      "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
+      # "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
       pull.rebase = "true";
     };
   };
