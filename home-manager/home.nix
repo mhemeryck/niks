@@ -203,7 +203,6 @@ rec {
     extraConfig = ''
       $env.config.show_banner = false
       $env.config.edit_mode = "vi"
-      $env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
       $env.config.hooks.pre_prompt = (
         $env.config.hooks.pre_prompt | append ({ ||
             if (which direnv | is-empty) {
@@ -213,6 +212,7 @@ rec {
             direnv export json | from json | default {} | load-env
         })
       )
+      $env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
     '';
   };
 
