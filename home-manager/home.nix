@@ -44,6 +44,7 @@ rec {
     nushell
     oh-my-posh
     pass
+    pinentry-curses
     poetry
     python313
     pyright
@@ -129,7 +130,7 @@ rec {
     enable = true;
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
-    signing.key = "4C4FB5172D377467BC181A78C39863A74BE56E17";
+    signing.key = "F9DB1494AE92FE2B";
     extraConfig = {
       init.defaultBranch = "master";
       "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
@@ -211,11 +212,23 @@ rec {
             direnv export json | from json | default {} | load-env
         })
       )
+      $env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
     '';
   };
 
   programs.oh-my-posh.enable = true;
 
+  programs.gpg.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    enableNushellIntegration = true;
+    sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
+    pinentryPackage = pkgs.pinentry-curses;
+    grabKeyboardAndMouse = false;
+  };
 }

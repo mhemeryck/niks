@@ -108,7 +108,6 @@
     pinentry-gnome3
     vim
     wget
-    # inputs.ghostty-flake.packages.${pkgs.system}.default
     inputs.wezterm-flake.packages.${pkgs.system}.default
   ];
 
