@@ -129,6 +129,7 @@ rec {
 
   programs.git = {
     enable = true;
+    ignores = [ ".envrc" ];
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
     signing.key = "F9DB1494AE92FE2B";
