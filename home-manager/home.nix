@@ -41,6 +41,7 @@ rec {
     maven
     nil
     nixfmt-classic
+    nufmt
     nushell
     oh-my-posh
     pass
@@ -162,6 +163,11 @@ rec {
           name = "nix";
           auto-format = true;
           formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+        }
+        {
+          name = "nu";
+          auto-format = true;
+          formatter.command = "${pkgs.nufmt}/bin/nufmt";
         }
         {
           name = "markdown";
