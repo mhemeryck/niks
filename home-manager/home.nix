@@ -132,7 +132,10 @@ rec {
     ignores = [ ".envrc" ];
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
-    signing.key = "F9DB1494AE92FE2B";
+    signing = {
+      key = "F9DB1494AE92FE2B";
+      signByDefault = true;
+    };
     extraConfig = {
       init.defaultBranch = "master";
       # "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
