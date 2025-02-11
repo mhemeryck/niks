@@ -35,6 +35,7 @@ rec {
     gnupg
     helix
     jdt-language-server
+    keychain
     kubectl
     nodejs
     markdown-oxide
@@ -104,6 +105,10 @@ rec {
         "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
       ];
     };
+
+    ".gnupg/gpg-agent.conf".text = ''
+      pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
+    '';
   };
 
   # Home Manager can also manage your environment variables through
@@ -222,23 +227,33 @@ rec {
             direnv export json | from json | default {} | load-env
         })
       )
-      $env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
+      # $env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
+
+      # keychain --gpg2 --eval --quiet --quick --agents gpg 5E68A67DE3722C6E4CADF1F1181D8DEEAC367AA4
+      # | lines
+      # | where not ($it | is-empty)
+      # | parse "{k}={v}; export {k2};"
+      # | select k v
+      # | transpose --header-row
+      # | into record
+      # | load-env
     '';
   };
 
   programs.oh-my-posh.enable = true;
 
-  programs.gpg.enable = true;
+  # programs.gpg.enable = false;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    enableNushellIntegration = true;
-    sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
-    pinentryPackage = pkgs.pinentry-curses;
-    grabKeyboardAndMouse = false;
-  };
+  # services.gpg-agent = {
+  #   enable = false;
+  #   enableSshSupport = true;
+  #   enableScDaemon = false;
+  #   enableNushellIntegration = true;
+  #   sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
+  #   pinentryPackage = pkgs.pinentry-curses;
+  #   grabKeyboardAndMouse = false;
+  # };
 }
