@@ -41,6 +41,7 @@ rec {
     maven
     nil
     nixfmt-classic
+    nufmt
     nushell
     oh-my-posh
     pass
@@ -128,12 +129,16 @@ rec {
 
   programs.git = {
     enable = true;
+    ignores = [ ".envrc" ];
     userEmail = "martijn.hemeryck@gmail.com";
     userName = "mhemeryck";
-    signing.key = "F9DB1494AE92FE2B";
+    signing = {
+      key = "F9DB1494AE92FE2B";
+      signByDefault = true;
+    };
     extraConfig = {
       init.defaultBranch = "master";
-      "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
+      # "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
       pull.rebase = "true";
     };
   };
@@ -162,6 +167,11 @@ rec {
           name = "nix";
           auto-format = true;
           formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+        }
+        {
+          name = "nu";
+          auto-format = true;
+          formatter.command = "${pkgs.nufmt}/bin/nufmt";
         }
         {
           name = "markdown";
