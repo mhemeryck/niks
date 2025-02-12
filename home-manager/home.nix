@@ -24,6 +24,7 @@ rec {
     cargo
     direnv
     dprint
+    google-cloud-sql-proxy
     (google-cloud-sdk.withExtraComponents
       [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     gh
