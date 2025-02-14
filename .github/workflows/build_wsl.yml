@@ -16,7 +16,9 @@ jobs:
     - name: Build tarballBuilder
       run: nix build .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
     - name: Run tarballBuilder
-      run: sudo ./result/bin/tarballBuilder nixos-wsl-tinkerbell.tar.gz
+      run: |
+        ls -lR *
+        sudo ./result/bin/tarballBuilder nixos-wsl-tinkerbell.tar.gz
     - uses: actions/upload-artifact@v4
       with:
         name: tarball
