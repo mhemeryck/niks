@@ -19,5 +19,5 @@ jobs:
       run: sudo ./result/bin/nixos-wsl-tarball-builder
     - uses: actions/upload-artifact@v4
       with:
-        name: tarball
+        name: nixos-wsl-tinkerbell.tar.gz
         path: hosts/tinkerbell/nixos-wsl.tar.gz
