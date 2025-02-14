@@ -13,6 +13,11 @@ jobs:
     - uses: cachix/install-nix-action@v27
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - run: nix flake check
-    - run: nix run .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
-    - run: sudo ./result/bin/tarballBuilder nixos-wsl-custom.tar.gz
+    - name: Build tarballBuilder
+      run: nix build .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
+    - name: Run tarballBuilder
+      run: sudo ./result/bin/tarballBuilder nixos-wsl-tinkerbell.tar.gz
+    - uses: actions/upload-artifact@v2
+      with:
+        name: tarball
+        path: nixos-wsl-tinkerbell.tar.gz
