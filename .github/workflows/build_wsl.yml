@@ -2,6 +2,7 @@ name: "Build NixOS-WSL"
 on:
   pull_request:
   push:
+  workflow_dispatch:
 jobs:
   build:
     defaults:
