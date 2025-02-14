@@ -14,4 +14,5 @@ jobs:
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - run: nix flake check
-    - run: sudo nix run .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
+    - run: nix run .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
+    - run: sudo ./result/bin/tarballBuilder nixos-wsl-custom.tar.gz
