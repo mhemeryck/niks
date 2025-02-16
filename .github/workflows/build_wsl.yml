@@ -55,7 +55,7 @@ jobs:
       uses: actions-ecosystem/action-bump-semver@v1
       with:
         current_version: ${{ steps.get-latest-tag.outputs.tag }}
-        level: patch  # Change this to major, minor, or patch as needed
+        level: minor
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
