@@ -1,0 +1,70 @@
+name: "Build NixOS-WSL"
+on:
+  workflow_dispatch: # Allow manual trigger
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    defaults:
+      run:
+        working-directory: ./hosts/tinkerbell
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v27
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run nix flake check
+      run: nix flake check
+
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    needs: test
+    defaults:
+      run:
+        working-directory: ./hosts/tinkerbell
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v27
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build tarballBuilder
+      run: nix build .#nixosConfigurations.tinkerbell.config.system.build.tarballBuilder
+    - name: Run tarballBuilder
+      run: sudo ./result/bin/nixos-wsl-tarball-builder
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
+        path: hosts/tinkerbell/nixos-wsl.tar.gz
+
+  release:
+    if: github.event.pull_request.merged == true
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions-ecosystem/action-get-latest-tag@v1
+      id: get-latest-tag
+    - name: Bump version
+      id: bump_version
+      uses: actions-ecosystem/action-bump-semver@v1
+      with:
+        current_version: ${{ steps.get-latest-tag.outputs.tag }}
+        level: minor
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
+    - name: Rename artifact
+      run: cp nixos-wsl.tar.gz nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.bump_version.outputs.new_version }}
+        name: Release ${{ steps.bump_version.outputs.new_version }}
+        files: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz # Attach the build artifact to the release
