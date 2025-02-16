@@ -43,7 +43,7 @@ jobs:
         path: hosts/tinkerbell/nixos-wsl.tar.gz
 
   release:
-    if: github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
     steps:
