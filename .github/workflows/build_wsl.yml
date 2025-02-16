@@ -62,11 +62,8 @@ jobs:
         name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
         path: ./hosts/tinkerbell
     - name: Create GitHub Release
-      uses: actions/create-release@v1
+      uses: softprops/action-gh-release@v2
       with:
-        tag: ${{ steps.bump_version.outputs.new_version }}
+        tag_name: ${{ steps.bump_version.outputs.new_version }}
         name: Release ${{ steps.bump_version.outputs.new_version }}
-        body: |
-          Release for commit ${{ github.sha }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: hosts/tinkerbell/nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz # Attach the build artifact to the release
+        files: hosts/tinkerbell/nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz # Attach the build artifact to the release
