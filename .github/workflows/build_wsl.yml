@@ -21,7 +21,7 @@ jobs:
       run: nix flake check
 
   build:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    # if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     needs: test
     defaults:
       run:
