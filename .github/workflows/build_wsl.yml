@@ -61,9 +61,7 @@ jobs:
       with:
         name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
     - name: List files for debugging
-      run: |
-        ls -alhR
-        cp nixos-wsl.tar.gz nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
+      run: cp nixos-wsl.tar.gz nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
