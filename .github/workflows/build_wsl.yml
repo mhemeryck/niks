@@ -48,19 +48,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions-ecosystem/action-get-latest-tag@v1
       id: get-latest-tag
     - name: Bump version
-    - name: Download artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
-        path: ./hosts/tinkerbell
-    - uses: actions-ecosystem/action-get-latest-tag@v1
       id: bump_version
       uses: actions-ecosystem/action-bump-semver@v1
       with:
         current_version: ${{ steps.get-latest-tag.outputs.tag }}
         part: patch  # Change this to major, minor, or patch as needed
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
+        path: ./hosts/tinkerbell
     - name: Create GitHub Release
       uses: actions/create-release@v1
       with:
