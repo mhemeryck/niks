@@ -2,8 +2,6 @@ name: "Build NixOS-WSL"
 on:
   workflow_dispatch: # Allow manual trigger
   pull_request:
-    branches:
-      - ${{ github.event.repository.default_branch }} # Run on pull requests to the default branch
   push:
     branches:
       - ${{ github.event.repository.default_branch }} # Run on push to the default branch
