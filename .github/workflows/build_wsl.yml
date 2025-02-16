@@ -43,7 +43,7 @@ jobs:
         path: hosts/tinkerbell/nixos-wsl.tar.gz
 
   release:
-    # if: github.event_name == 'push' && github.ref == 'refs/heads/${{ github.event.repository.default_branch }}'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/${{ github.event.repository.default_branch }}'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -60,7 +60,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
-    - name: List files for debugging
+    - name: Rename artifact
       run: cp nixos-wsl.tar.gz nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
