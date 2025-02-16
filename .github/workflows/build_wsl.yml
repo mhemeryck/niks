@@ -48,14 +48,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      id: get-latest-tag
+    - name: Bump version
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
         name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
         path: ./hosts/tinkerbell
     - uses: actions-ecosystem/action-get-latest-tag@v1
-      id: get-latest-tag
-    - name: Bump version
       id: bump_version
       uses: actions-ecosystem/action-bump-semver@v1
       with:
@@ -64,11 +64,9 @@ jobs:
     - name: Create GitHub Release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ steps.bump_version.outputs.new_version }}
-        release_name: Release ${{ steps.bump_version.outputs.new_version }}
+        tag: ${{ steps.bump_version.outputs.new_version }}
+        name: Release ${{ steps.bump_version.outputs.new_version }}
         body: |
           Release for commit ${{ github.sha }}
-        draft: false
-        prerelease: false
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: hosts/tinkerbell/nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz # Attach the build artifact to the release
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: hosts/tinkerbell/nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz # Attach the build artifact to the release
