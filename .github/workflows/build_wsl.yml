@@ -19,6 +19,13 @@ jobs:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run nix flake check
       run: nix flake check
+    - name: Remove old artifacts
+      uses: c-hive/gha-remove-artifacts@v1
+      with:
+        age: '1 month' # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds, parsed by Moment.js
+        # Optional inputs
+        # skip-tags: true
+        # skip-recent: 5
 
   build:
     # if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
@@ -43,7 +50,7 @@ jobs:
         path: hosts/tinkerbell/nixos-wsl.tar.gz
 
   release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/${{ github.event.repository.default_branch }}'
+    if: github.event.pull_request.merged == true
     needs: build
     runs-on: ubuntu-latest
     steps:
