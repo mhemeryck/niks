@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: nixos-wsl-tinkerbell-${{ github.sha }}.tar.gz
-        path: hosts/tinkerbell/nixos-wsl.tar.gz
+        path: hosts/tinkerbell/nixos.wsl
 
   release:
     if: github.ref == 'refs/heads/master'
