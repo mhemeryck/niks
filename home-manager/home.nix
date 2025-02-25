@@ -52,14 +52,15 @@ in rec {
     helix
     jdt-language-server
     kubectl
-    nodejs
     markdown-oxide
     maven
     nil
     nixfmt-classic
+    nodejs
     nufmt
     nushell
     oh-my-posh
+    openssl
     pass
     pinentry-curses
     poetry
