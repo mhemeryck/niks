@@ -62,6 +62,7 @@ in rec {
     oh-my-posh
     openssl
     pass
+    pgcli
     pinentry-curses
     poetry
     python313
