@@ -241,6 +241,8 @@ in rec {
         })
       )
       $env.SSH_AUTH_SOCK = (gpgconf --quiet --list-dirs agent-ssh-socket)
+
+      $env.PATH = ($env.PATH | split row (char esep) | append "${home.homeDirectory}/.go/bin")
     '';
   };
 
