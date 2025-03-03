@@ -37,6 +37,7 @@ in rec {
     bat
     carapace
     cargo
+    delve
     direnv
     dprint
     google-cloud-sql-proxy-v12
@@ -241,8 +242,6 @@ in rec {
         })
       )
       $env.SSH_AUTH_SOCK = (gpgconf --quiet --list-dirs agent-ssh-socket)
-
-      $env.PATH = ($env.PATH | split row (char esep) | append "${home.homeDirectory}/.go/bin")
     '';
   };
 
