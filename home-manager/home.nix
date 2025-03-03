@@ -74,6 +74,7 @@ in rec {
     terraform-ls
     tldr
     trash-cli
+    typescript-language-server
     wl-clipboard
     zig
     zip
