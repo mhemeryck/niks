@@ -33,6 +33,7 @@ in rec {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    aws-sam-cli
     awscli2
     bat
     carapace
@@ -209,6 +210,14 @@ in rec {
           formatter = {
             command = "${pkgs.dprint}/bin/dprint";
             args = [ "fmt" "--stdin" "typescript" ];
+          };
+        }
+        {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [ "fmt" "--stdin" "javascript" ];
           };
         }
         {
