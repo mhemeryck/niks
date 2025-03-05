@@ -33,10 +33,12 @@ in rec {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    aws-sam-cli
     awscli2
     bat
     carapace
     cargo
+    delve
     direnv
     dprint
     google-cloud-sql-proxy-v12
@@ -73,6 +75,7 @@ in rec {
     terraform-ls
     tldr
     trash-cli
+    typescript-language-server
     wl-clipboard
     zig
     zip
@@ -114,12 +117,14 @@ in rec {
       markdown = { };
       toml = { };
       dockerfile = { };
+      typescript = { };
       excludes = [ "**/*-lock.json" ];
       plugins = [
         "https://plugins.dprint.dev/json-0.19.4.wasm"
         "https://plugins.dprint.dev/markdown-0.17.8.wasm"
         "https://plugins.dprint.dev/toml-0.6.4.wasm"
         "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
+        "https://plugins.dprint.dev/typescript-0.94.0.wasm"
       ];
     };
   };
@@ -197,6 +202,22 @@ in rec {
           formatter = {
             command = "${pkgs.dprint}/bin/dprint";
             args = [ "fmt" "--stdin" "markdown" ];
+          };
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [ "fmt" "--stdin" "typescript" ];
+          };
+        }
+        {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [ "fmt" "--stdin" "javascript" ];
           };
         }
         {
