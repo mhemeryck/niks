@@ -127,6 +127,10 @@ in rec {
         "https://plugins.dprint.dev/typescript-0.94.0.wasm"
       ];
     };
+
+    ".docker/config.json".text = builtins.toJSON {
+      credHelpers = { "europe-west1-docker.pkg.dev" = "gcloud"; };
+    };
   };
 
   # Home Manager can also manage your environment variables through
