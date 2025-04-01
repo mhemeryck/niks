@@ -63,7 +63,7 @@ in rec {
     nushell
     oh-my-posh
     openssl
-    pass
+    (pass.withExtensions (exts: [ exts.pass-otp ]))
     pgcli
     pinentry-curses
     poetry
