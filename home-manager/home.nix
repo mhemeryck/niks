@@ -1,21 +1,6 @@
 { pkgs, ... }:
 
-let
-  # Override for cloud-sql-proxy
-  google-cloud-sql-proxy-v12 = pkgs.google-cloud-sql-proxy.overrideAttrs
-    (finalAttrs: previousAttrs: rec {
-      version = "2.12.0";
-      src = pkgs.fetchFromGitHub {
-        owner = "GoogleCloudPlatform";
-        repo = "cloudsql-proxy";
-        rev = "v${version}";
-        hash = "sha256-nEbrNRrEXXvLYi1vIvukUaq+WQn2HlonaaMn57yIA3I=";
-      };
-      vendorHash = "sha256-EI2PDVdS9JB8ACkRTsfCBLz4JEmHQ6hApFSSfSvD/cQ=";
-      subPackages = [ "." ];
-      checkFlags = [ "-short" ];
-    });
-in rec {
+rec {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mhemeryck";
@@ -42,7 +27,7 @@ in rec {
     delve
     direnv
     dprint
-    google-cloud-sql-proxy-v12
+    google-cloud-sql-proxy
     (google-cloud-sdk.withExtraComponents
       [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     gh
