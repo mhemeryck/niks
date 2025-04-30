@@ -55,5 +55,14 @@
     };
   };
 
+  # bugfix; see https://github.com/nix-community/NixOS-WSL/issues/650
+  systemd.services."user-runtime-dir@" = {
+    overrideStrategy = "asDropin";
+    serviceConfig.ExecStart = [
+      "" # unset old value
+      "${pkgs.coreutils}/bin/true"
+    ];
+  };
+
   virtualisation.docker.enable = true;
 }
