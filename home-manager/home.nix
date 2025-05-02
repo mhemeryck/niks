@@ -251,7 +251,7 @@ rec {
             direnv export json | from json | default {} | load-env
         })
       )
-      $env.SSH_AUTH_SOCK = (gpgconf --quiet --list-dirs agent-ssh-socket)
+      # $env.SSH_AUTH_SOCK = (gpgconf --quiet --list-dirs agent-ssh-socket)
     '';
   };
 
