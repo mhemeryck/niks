@@ -267,7 +267,7 @@ rec {
     enableSshSupport = true;
     enableNushellIntegration = true;
     sshKeys = [ "247DB8BA660674C13007DDF77FD555EE09A5438C" ];
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
     grabKeyboardAndMouse = false;
   };
 }
