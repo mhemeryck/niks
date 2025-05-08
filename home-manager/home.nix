@@ -63,6 +63,7 @@ rec {
     trash-cli
     typescript-language-server
     wl-clipboard
+    yarn
     zig
     zip
     zls
