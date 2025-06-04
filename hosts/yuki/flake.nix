@@ -1,7 +1,7 @@
 {
   inputs = {
     # NixOS official package source, here using the nixos-24.11 branch
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     wezterm-flake.url = "github:wez/wezterm/main?dir=nix";
     wezterm-flake.inputs.nixpkgs.follows = "nixpkgs";
   };

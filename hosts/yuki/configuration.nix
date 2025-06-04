@@ -50,7 +50,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   security.sudo.extraRules = [{
     users = [ "mhemeryck" ];
@@ -108,7 +108,8 @@
     pinentry-gnome3
     vim
     wget
-    inputs.wezterm-flake.packages.${pkgs.system}.default
+    # inputs.wezterm-flake.packages.${pkgs.system}.default
+    wezterm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
