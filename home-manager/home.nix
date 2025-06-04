@@ -25,6 +25,7 @@ rec {
     carapace
     cargo
     delve
+    dig
     direnv
     dprint
     google-cloud-sql-proxy
