@@ -40,6 +40,7 @@ rec {
     gnupg
     helix
     jdt-language-server
+    jwt-cli
     kubectl
     markdown-oxide
     maven
