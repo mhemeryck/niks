@@ -29,8 +29,7 @@ rec {
     direnv
     dprint
     google-cloud-sql-proxy
-    (google-cloud-sdk.withExtraComponents
-      [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     gh
     git
     git-crypt
@@ -45,7 +44,7 @@ rec {
     markdown-oxide
     maven
     nil
-    nixfmt-classic
+    nixfmt-rfc-style
     nodejs
     nufmt
     nushell
@@ -119,7 +118,9 @@ rec {
     };
 
     ".docker/config.json".text = builtins.toJSON {
-      credHelpers = { "europe-west1-docker.pkg.dev" = "gcloud"; };
+      credHelpers = {
+        "europe-west1-docker.pkg.dev" = "gcloud";
+      };
     };
   };
 
@@ -142,7 +143,9 @@ rec {
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.carapace = { enable = true; };
+  programs.carapace = {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -157,8 +160,7 @@ rec {
       init.defaultBranch = "master";
       # "url.git@gitlab.com:".insteadOf = "https://gitlab.com";
       pull.rebase = "true";
-      "credential \"https://github.com\"".helper =
-        "!${pkgs.gh}/bin/gh auth git-credential";
+      "credential \"https://github.com\"".helper = "!${pkgs.gh}/bin/gh auth git-credential";
       # "credential \"https://gist.github.com\"".helper =
       #   "!${pkgs.gh}/bin/gh auth git-credential";
     };
@@ -187,7 +189,7 @@ rec {
         {
           name = "nix";
           auto-format = true;
-          formatter.command = "${pkgs.nixfmt-classic}/bin/nixfmt";
+          formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
         }
         {
           name = "nu";
@@ -199,7 +201,11 @@ rec {
           auto-format = true;
           formatter = {
             command = "${pkgs.dprint}/bin/dprint";
-            args = [ "fmt" "--stdin" "markdown" ];
+            args = [
+              "fmt"
+              "--stdin"
+              "markdown"
+            ];
           };
         }
         {
@@ -207,7 +213,11 @@ rec {
           auto-format = true;
           formatter = {
             command = "${pkgs.dprint}/bin/dprint";
-            args = [ "fmt" "--stdin" "typescript" ];
+            args = [
+              "fmt"
+              "--stdin"
+              "typescript"
+            ];
           };
         }
         {
@@ -215,16 +225,26 @@ rec {
           auto-format = true;
           formatter = {
             command = "${pkgs.dprint}/bin/dprint";
-            args = [ "fmt" "--stdin" "javascript" ];
+            args = [
+              "fmt"
+              "--stdin"
+              "javascript"
+            ];
           };
         }
         {
           name = "python";
           auto-format = true;
-          language-servers = [ "pyright" "ruff" ];
+          language-servers = [
+            "pyright"
+            "ruff"
+          ];
           formatter = {
             command = "ruff";
-            args = [ "format" "-" ];
+            args = [
+              "format"
+              "-"
+            ];
           };
         }
       ];
@@ -233,7 +253,10 @@ rec {
         ruff = {
           command = "ruff";
           args = [ "server" ];
-          config.settings.args = [ "ignore" "E501" ];
+          config.settings.args = [
+            "ignore"
+            "E501"
+          ];
         };
       };
     };
