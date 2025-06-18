@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   security.pki.certificateFiles = [
     ./certs/cert_ISA_GP_Intermediate.pem
