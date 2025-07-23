@@ -58,6 +58,7 @@ rec {
     pyright
     ruff
     rustc
+    superhtml
     terraform
     terraform-ls
     tldr
