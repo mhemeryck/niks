@@ -150,4 +150,10 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   virtualisation.docker.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true; # Show battery charge of Bluetooth devices
+  };
 }
