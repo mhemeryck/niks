@@ -195,7 +195,10 @@ rec {
         {
           name = "nu";
           auto-format = true;
-          formatter.command = "${pkgs.nufmt}/bin/nufmt";
+          formatter = {
+            command = "${pkgs.nufmt}/bin/nufmt";
+            args = [ "--stdin" ];
+          };
         }
         {
           name = "markdown";
