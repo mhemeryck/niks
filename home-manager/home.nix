@@ -238,6 +238,18 @@ rec {
           };
         }
         {
+          name = "yaml";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [
+              "fmt"
+              "--stdin"
+              "yaml"
+            ];
+          };
+        }
+        {
           name = "python";
           auto-format = true;
           language-servers = [
