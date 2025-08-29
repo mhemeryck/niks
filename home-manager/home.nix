@@ -115,6 +115,7 @@ rec {
         "https://plugins.dprint.dev/toml-0.6.4.wasm"
         "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
         "https://plugins.dprint.dev/typescript-0.94.0.wasm"
+        "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm"
       ];
     };
 
