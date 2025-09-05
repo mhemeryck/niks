@@ -64,6 +64,7 @@ rec {
     tldr
     trash-cli
     typescript-language-server
+    unzip
     wl-clipboard
     yaml-language-server
     yarn
