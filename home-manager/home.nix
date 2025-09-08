@@ -27,6 +27,7 @@ rec {
     delve
     dig
     direnv
+    docker-credential-helpers
     dprint
     google-cloud-sql-proxy
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
@@ -123,6 +124,14 @@ rec {
     ".docker/config.json".text = builtins.toJSON {
       credHelpers = {
         "europe-west1-docker.pkg.dev" = "gcloud";
+      };
+
+      credsStore = "pass";
+
+      auths = {
+        "https://index.docker.io/v1/" = { };
+        "https://index.docker.io/v1/access-token" = { };
+        "https://index.docker.io/v1/refresh-token" = { };
       };
     };
   };
