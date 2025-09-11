@@ -29,6 +29,8 @@ rec {
     direnv
     docker-credential-helpers
     dprint
+    golangci-lint
+    golangci-lint-langserver
     google-cloud-sql-proxy
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     gh
