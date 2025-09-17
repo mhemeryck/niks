@@ -136,6 +136,10 @@ rec {
         "https://index.docker.io/v1/refresh-token" = { };
       };
     };
+
+    ".npmrc".text = ''
+      ignore-scripts=true
+    '';
   };
 
   # Home Manager can also manage your environment variables through
