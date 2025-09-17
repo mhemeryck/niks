@@ -68,6 +68,7 @@ rec {
     trash-cli
     typescript-language-server
     unzip
+    vscode-langservers-extracted
     wl-clipboard
     yaml-language-server
     yarn
@@ -263,6 +264,18 @@ rec {
               "fmt"
               "--stdin"
               "yaml"
+            ];
+          };
+        }
+        {
+          name = "json";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.dprint}/bin/dprint";
+            args = [
+              "fmt"
+              "--stdin"
+              "json"
             ];
           };
         }
