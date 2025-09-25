@@ -332,6 +332,8 @@ rec {
       if $"(hostname)" == "yuki" {
         $env.SSH_AUTH_SOCK = (gpgconf --quiet --list-dirs agent-ssh-socket)
       }
+
+      $env.PATH = ($env.PATH | append ($nu.home-path | path join '.go' 'bin'))
     '';
   };
 
