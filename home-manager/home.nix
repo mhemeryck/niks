@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs2505, ... }:
 
 rec {
   # Home Manager needs a bit of information about you and the paths it should
@@ -20,7 +20,7 @@ rec {
   home.packages = with pkgs; [
     _1password-cli
     aws-sam-cli
-    awscli2
+    pkgs2505.awscli2
     bat
     carapace
     cargo
